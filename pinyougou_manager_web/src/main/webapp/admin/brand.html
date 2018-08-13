@@ -14,109 +14,10 @@
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
     <script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
-    <script>
-        var app = angular.module('pinyougou',['pagination']);//自定义模块
+    <script type="text/javascript" src="/js/base_pagination.js"></script>
+    <script type="text/javascript" src="/js/service/brandService.js"></script>
+    <script type="text/javascript" src="/js/controller/brandController.js"></script>
 
-        //品牌服务层
-        app.service('brandService',function ($http) {
-            //自定义搜索对象为空 防止穿过去null 造成空指针异常
-            $scope.searchEntity ={};
-            this.search = function (page,rows) {
-                return $http.post('../brand/search.do?page=' + page + "&rows=" + rows,$scope.searchEntity);
-            }
-
-        });
-
-
-        //品牌控制层
-        app.controller('brandController',function($scope,brandService) {
-
-
-            //重新加载列表
-            $scope.reloadList = function () {
-                //切换页码
-                $scope.search($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-
-            }
-                //设置页码等信息
-            $scope.paginationConf = {
-                currentPage: 1,
-                totalItems: 10,
-                itemsPerPage: 10,
-                perPageOptions: [10, 20, 30, 40, 50],
-                onChange: function () {
-                    $scope.reloadList();//重新加载
-                }
-            };
-
-
-            //条件查询
-            $scope.search = function (page, rows) {
-                console.log($scope.searchEntity)
-               brandService.search().success(
-                    function (response) {
-                        $scope.list = response.rows;
-                        $scope.paginationConf.totalItems = response.total;//总记录数
-                    }
-                );
-            }
-            //增加品牌或者修改品牌信息
-            $scope.save=function(){
-
-                var method = "add";
-                if($scope.entity.id!=null){ //如果他的id不为null 说明是修改更新
-                        method = "update";
-                }
-
-               $http.post('../brand/'+method+'.do',$scope.entity).success(
-                   function (response) {
-                       if (response.success){//如果成功
-                           alert(response.message);
-                           $scope.reloadList();//重新加载
-                           //清空表格
-                           $scope.entity = "";
-                       }else{
-                           alert(response.message);
-                       }
-                   }
-               )
-            }
-
-            //自定义集合 存放要删除的id
-            $scope.selectIds=[];
-            //复选框更新
-            $scope.updateSelection = function ($event,id) {
-                
-                if ($event.target.checked){//如果被选中
-                    $scope.selectIds.push(id)
-                }else {
-                    var idx = $scope.selectIds.indexOf(id);
-                    $scope.selectIds.splice(idx,1);//删除该id
-                }
-            }
-            //批量删除
-            $scope.dele=function () {
-                alert("agag")
-                $http.get('../brand/delete.do?ids='+$scope.selectIds).success(
-
-                    function(response){
-                        if(response.success){
-                            $scope.reloadList();//刷新列表
-                        }
-                    });
-            }
-            //通过id获取到要修改的信息
-            $scope.edit=function (id) {
-                $http.get('../brand/findById.do?id='+id).success(
-                    function (response) {
-                        $scope.entity=response;
-                    }
-                )
-            }
-
-
-        });
-    </script>
     
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="brandController">
@@ -171,7 +72,7 @@
 									      <td>{{entity.name}}</td>
 		                                  <td>{{entity.firstChar}}</td>
 		                                  <td class="text-center">                                           
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  ng-click="edit(entity.id)">修改</button>
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  ng-click="findOne(entity.id)">修改</button>
 		                                  </td>
 			                          </tr>
 			                      </tbody>
