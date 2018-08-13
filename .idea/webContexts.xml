@@ -4,6 +4,8 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/brand.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/specification.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/type_template.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
       </map>
     </option>
   </component>

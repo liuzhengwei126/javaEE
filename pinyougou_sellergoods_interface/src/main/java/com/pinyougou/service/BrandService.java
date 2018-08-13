@@ -4,6 +4,7 @@ import com.pinyougou.entity.PageResult;
 import com.pinyougou.pojo.TbBrand;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author ：请叫我伟哥.
@@ -43,4 +44,10 @@ public interface BrandService {
      * @param brand
      */
     public void update(TbBrand brand);
+
+    /**
+     * 查询品牌名称信息
+     * @return
+     */
+    public List<Map> selectOptionList();
 }

@@ -19,5 +19,8 @@ app.service('brandService',function ($http) {
     this.findOne = function (id) {
         return $http.get('../brand/findById.do?id='+id);
     }
+    this.selectOptionList = function () {
+        return $http.get('../brand/selectOptionList.do');
+    }
 
 });

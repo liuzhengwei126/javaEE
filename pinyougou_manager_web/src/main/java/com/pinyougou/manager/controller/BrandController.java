@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author ：请叫我伟哥.
@@ -70,6 +71,12 @@ public class BrandController {
             e.printStackTrace ();
             return new ResultModel (true,"修改失败",null);
         }
+    }
+
+    @RequestMapping("/selectOptionList")
+    @ResponseBody
+    public List<Map> selectOptionList(){
+        return brandService.selectOptionList ();
     }
 
 }

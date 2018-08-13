@@ -1,5 +1,9 @@
 //品牌控制层
-app.controller('brandController',function($scope,brandService) {
+app.controller('brandController',function($scope,$controller,brandService) {
+    //继承父类控制器
+    $controller('baseController',{$scope:$scope});//继承
+
+/*
     //重新加载列表
     $scope.reloadList = function () {
         //切换页码
@@ -14,7 +18,7 @@ app.controller('brandController',function($scope,brandService) {
         onChange: function () {
             $scope.reloadList();//重新加载
         }
-    };
+    };*/
     //自定义搜索对象为空 防止穿过去null 造成空指针异常
     $scope.searchEntity ={};
     //条件查询
@@ -48,7 +52,7 @@ app.controller('brandController',function($scope,brandService) {
         )
     }
 
-    //自定义集合 存放要删除的id
+   /* //自定义集合 存放要删除的id
     $scope.selectIds=[];
     //复选框更新
     $scope.updateSelection = function ($event,id) {
@@ -58,7 +62,7 @@ app.controller('brandController',function($scope,brandService) {
             var idx = $scope.selectIds.indexOf(id);
             $scope.selectIds.splice(idx,1);//删除该id
         }
-    }
+    }*/
     //批量删除
     $scope.dele=function () {
         brandService.dele($scope.selectIds).success(

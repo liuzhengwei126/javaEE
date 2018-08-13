@@ -5,6 +5,7 @@ import com.pinyougou.pojo.TbBrandExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface TbBrandMapper {
@@ -29,4 +30,6 @@ public interface TbBrandMapper {
     int updateByPrimaryKeySelective(TbBrand record);
 
     int updateByPrimaryKey(TbBrand record);
+
+    List<Map> selectOptionList();
 }

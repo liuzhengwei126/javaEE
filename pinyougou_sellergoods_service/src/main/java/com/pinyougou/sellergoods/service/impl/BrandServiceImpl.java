@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author ：请叫我伟哥.
@@ -64,5 +65,10 @@ public class BrandServiceImpl  implements BrandService{
     @Override
     public void update(TbBrand brand) {
         tbBrandMapper.updateByPrimaryKey (brand);
+    }
+
+    @Override
+    public List <Map> selectOptionList() {
+        return tbBrandMapper.selectOptionList ();
     }
 }

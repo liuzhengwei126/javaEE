@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
     <script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
     <script type="text/javascript" src="/js/base_pagination.js"></script>
+    <script type="text/javascript" src="/js/controller/baseController.js"></script>
     <script type="text/javascript" src="/js/service/brandService.js"></script>
     <script type="text/javascript" src="/js/controller/brandController.js"></script>
 
@@ -46,7 +47,7 @@
                                     <div class="has-feedback">
                                         品牌名称：<input type="text" ng-model="searchEntity.name">
                                         首字母：<input type="text"   ng-model="searchEntity.firstChar">
-                                        <button class="btn btn-default" ng-click=" search(1,paginationConf.itemsPerPage)">搜索</button>
+                                        <button class="btn btn-default" ng-click="search(1,paginationConf.itemsPerPage)">搜索</button>
                                     </div>
                                 </div>
                             </div>
