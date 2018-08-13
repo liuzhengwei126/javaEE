@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--加载配置-->
+    <context:property-placeholder location="classpath:properties/*.properties"/>
+    <!--配置数据库连接-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+            destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="10"/>
+        <property name="maxIdle" value="5"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+     </bean>
+
+    <!--sessionFactory-->
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载配置文件 用于创建sqlSessionFactiory-->
+        <property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+    </bean>
+
+
+    <!-- 使用扫描包的形式来创建mapper代理对象 如果配置了下面的内容,则不需要在SqlMapConfig.xml里面配置扫描映射的mapper-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.pinyougou.mapper"></property>
+    </bean>
+
+</beans>
