@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.entity.ResultModel;
+import com.pinyougou.pojogroup.Goods;
 import com.pinyougou.service.GoodsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public ResultModel add(@RequestBody TbGoods goods){
+	public ResultModel add(@RequestBody Goods goods){
 		try {
 			goodsService.add(goods);
 			return new ResultModel(true, "增加成功",null);

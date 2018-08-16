@@ -26,7 +26,10 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 	$scope.findOne=function(id){				
 		typeTemplateService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				$scope.entity.brandIds = JSON.parse($scope.entity.brandIds);
+				$scope.entity.specIds = JSON.parse($scope.entity.specIds);
+                $scope.entity.customAttributeItems = JSON.parse($scope.entity.customAttributeItems);
 			}
 		);				
 	}
@@ -85,6 +88,7 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
                 $scope.brandList={data:response};
             }
         )
+
     }
     $scope.findSpecList = function () {
         specificationService.selectSpecList().success(
@@ -101,5 +105,20 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 
     $scope.deleTableRow=function(index){
         $scope.entity.customAttributeItems.splice(index,1);//删除
+    }
+
+    //提取json字符串中的一个字段
+
+    $scope.jsonToString = function (jsonString,key) {
+        //将jsonString转换成对象
+        var json = JSON.parse(jsonString);
+        var value = "";
+        for (i=0;i<json.length;i++){
+            if (i>0){
+                value+=",";
+            }
+            value += json[i][key];
+        }
+        return value;
     }
 });	

@@ -35,15 +35,17 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
 		if($scope.entity.id!=null){//如果有ID
-			serviceObject=itemCatService.update( $scope.entity ); //修改  
+			serviceObject=itemCatService.update( $scope.entity); //修改
 		}else{
-			serviceObject=itemCatService.add( $scope.entity  );//增加 
+            $scope.entity.parentId = $scope.parentId;
+			serviceObject=itemCatService.add( $scope.entity);//增加
 		}				
 		serviceObject.success(
 			function(response){
 				if(response.success){
 					//重新查询 
-		        	$scope.reloadList();//重新加载
+                    $scope.findByParentId($scope.parentId);//重新加载
+                    $scope.entity={};
 				}else{
 					alert(response.message);
 				}
@@ -64,7 +66,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		);				
 	}
 	
-	$scope.searchEntity={};//定义搜索对象 
+	/*$scope.searchEntity={};//定义搜索对象
 	
 	//搜索
 	$scope.search=function(page,rows){			
@@ -74,6 +76,43 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	}*/
+
+    //定义父级ID 在保存的时候需要用到
+    $scope.parentId = 0;
+	//根据父类ID查
+    $scope.findByParentId = function (parentId) {
+        $scope.parentId =parentId;
+        itemCatService.findByParentId(parentId).success(
+            function (response) {
+                $scope.list=response;
+            }
+        )
+    }
+    //定义等级
+    $scope.grade = 1; //初始为一级
+
+
+    $scope.setGrade = function (value) {
+        $scope.grade=value;
+    }
+
+    $scope.selectList = function (p_entity) {
+
+        if ($scope.grade ==1 ){
+                $scope.entity_1 = null;
+                $scope.entity_2 = null;
+        }
+        if ($scope.grade ==2 ){
+                $scope.entity_1 = p_entity;
+                $scope.entity_3 = null;
+        }
+        if ($scope.grade ==3 ){
+            $scope.entity_2 = p_entity;
+        }
+        $scope.findByParentId(p_entity.id);	//查询此级下级列表
+    }
+
+
     
 });	

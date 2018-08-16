@@ -31,6 +31,6 @@ app.service('specificationService',function($http){
 	}
 
     this.selectSpecList = function () {
-        return $http.get('../brand/selectSpecList.do');
+        return $http.get('../specification/selectSpecList.do');
     }
 });

@@ -109,5 +109,15 @@ public class SellerController {
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
 	}
-	
+    @RequestMapping("/updateStatus")
+    public ResultModel updateStatus(String sellerId,String status){
+        try {
+            sellerService.updateStatus (sellerId,status);
+            return new ResultModel (true,"审核成功",null);
+        } catch (Exception e) {
+            e.printStackTrace ();
+            return new ResultModel (false,"审核失败",null);
+        }
+
+    }
 }

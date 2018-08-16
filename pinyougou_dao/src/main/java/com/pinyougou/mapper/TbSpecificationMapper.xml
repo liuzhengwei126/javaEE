@@ -130,7 +130,7 @@
     </if>
   </select>
     <select id="selectSpecList" resultType="java.util.Map">
-        select id,name as text from tb_specification
+        select id,spec_name as text from tb_specification
     </select>
     <update id="updateByExampleSelective" parameterType="map" >
     update tb_specification

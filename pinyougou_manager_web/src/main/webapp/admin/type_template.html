@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="typeTemplateController" ng-init="findBrandList()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="typeTemplateController" ng-init="findBrandList();findSpecList()">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -81,9 +81,9 @@
 			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
 				                          <td>{{entity.id}}</td>
                                           <td>{{entity.name}}</td>
-									      <td>{{entity.brandIds}}</td>
-									      <td>{{entity.specIds}}</td>
-									      <td>{{entity.customAttributeItems}}</td>
+									      <td>{{jsonToString(entity.brandIds,'text')}}</td>
+									      <td>{{jsonToString(entity.specIds,'text')}}</td>
+									      <td>{{jsonToString(entity.customAttributeItems,'text')}}</td>
 		                                  <td class="text-center">                                           
 		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(entity.id)">修改</button>
 		                                  </td>
@@ -119,7 +119,7 @@
 			<table class="table table-bordered table-striped"  width="800px">
 		      	<tr>
 		      		<td>商品类型</td>
-		      		<td><input  class="form-control" placeholder="商品类型">  </td>
+		      		<td><input  class="form-control" placeholder="商品类型" ng-model="entity.name">  </td>
 		      	</tr>			   
 		      	<tr>
 		      		<td>关联品牌</td>
@@ -166,7 +166,7 @@
 			
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true"  ng-click="save()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

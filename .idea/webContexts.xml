@@ -4,8 +4,16 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/brand.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/index.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/item_cat.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/seller_1.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/specification.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin/type_template.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp/login.html" value="file://$PROJECT_DIR$/pinyougou_manager_web/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp/admin/goods_edit.html" value="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp/admin/index.html" value="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp/admin" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp/register.html" value="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp/shoplogin.html" value="file://$PROJECT_DIR$/pinyougou_shop_web/src/main/webapp" />
       </map>
     </option>
   </component>
