@@ -3,9 +3,12 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou_content_interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou_content_service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_manager_web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_pojo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/pinyougou_protal_web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_sellergoods_interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_sellergoods_service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/pinyougou_shop_web" charset="UTF-8" />

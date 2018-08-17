@@ -11,6 +11,7 @@ import com.pinyougou.mapper.TbGoodsDescMapper;
 import com.pinyougou.pojo.TbGoodsDesc;
 import com.pinyougou.pojo.TbGoodsDescExample;
 import com.pinyougou.pojo.TbGoodsDescExample.Criteria;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -19,6 +20,7 @@ import com.pinyougou.pojo.TbGoodsDescExample.Criteria;
  *
  */
 @Service
+@Transactional
 public class GoodsDescServiceImpl implements GoodsDescService {
 
 	@Autowired
@@ -112,5 +114,6 @@ public class GoodsDescServiceImpl implements GoodsDescService {
 		Page<TbGoodsDesc> page= (Page<TbGoodsDesc>)goodsDescMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+
 }

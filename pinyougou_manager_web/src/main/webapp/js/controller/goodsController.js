@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller,typeTemplateService,goodsService,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -64,7 +64,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 		);				
 	}
 	
-	$scope.searchEntity={};//定义搜索对象 
+	$scope.searchEntity={};//定义搜索对象
 	
 	//搜索
 	$scope.search=function(page,rows){			
@@ -75,5 +75,32 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 			}			
 		);
 	}
+
+    //定义数组 用来显示商品状态
+    $scope.status=['未审核','已审核','审核未通过','关闭'];//商品状态
+
+    //查找出所有的类目名称 组成数组 然后用来显示
+    $scope.itemCatList=[];//商品分类列表
+    $scope.findItemCatList = function () {
+        itemCatService.findAll().success(
+            function (response) {
+                for (var i=0;i<response.length;i++){
+                    //根据id进行排列
+                    $scope.itemCatList[response[i].id] = response[i].name;
+                }
+            });
+    }
+    //修改商品的状态
+    $scope.updateStatus = function (status) {
+        //获取选中的复选框
+        goodsService.updateStatus( $scope.selectIds,status).success(
+            function(response){
+                if(response.success){
+                    $scope.reloadList();//刷新列表
+                    $scope.selectIds=[]; //清空选择框集合
+                }
+            }
+        );
+    }
     
 });	

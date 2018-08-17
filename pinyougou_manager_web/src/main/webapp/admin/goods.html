@@ -15,9 +15,22 @@
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <!-- 分页组件开始 -->
+    <script src="../plugins/angularjs/pagination.js"></script>
+    <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+    <!-- 分页组件结束 -->
+    <script type="text/javascript" src="../js/base_pagination.js"></script>
+
+    <script type="text/javascript" src="../js/service/goodsService.js"></script>
+    <script type="text/javascript" src="../js/service/itemCatService.js"></script>
+    <script type="text/javascript" src="../js/service/typeTemplateService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/goodsController.js"></script>
+
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" >
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="searchEntity={auditStatus:'0'};findItemCatList()">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -33,17 +46,17 @@
                             <div class="pull-left">
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" class="btn btn-default" title="审核通过" ><i class="fa fa-check"></i> 审核通过</button>
-                                        <button type="button" class="btn btn-default" title="驳回" ><i class="fa fa-ban"></i> 驳回</button>                                  
-                                        <button type="button" class="btn btn-default" title="刷新" ><i class="fa fa-refresh"></i> 刷新</button>
+                                        <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>
+                                        <button type="button" class="btn btn-default" title="审核通过" ng-click="updateStatus('1')"><i class="fa fa-check"></i> 审核通过</button>
+                                        <button type="button" class="btn btn-default" title="驳回" ng-click="updateStatus('2')"><i class="fa fa-ban"></i> 驳回</button>
+                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-                                    商品名称：<input >
-									<button class="btn btn-default" >查询</button>                                    
+                                    商品名称：<input ng-model="searchEntity.goodsName">
+									<button class="btn btn-default" ng-click="search(1,paginationConf.itemsPerPage)">查询</button>
                                 </div>
                             </div>
                             <!--工具栏/-->
@@ -53,7 +66,7 @@
 			                      <thead>
 			                          <tr>
 			                              <th class="" style="padding-right:0px">
-			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue"  ng-click="updateSelection($event,entity.id)">
 			                              </th> 
 										  <th class="sorting_asc">商品ID</th>
 									      <th class="sorting">商品名称</th>
@@ -66,17 +79,17 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
-			                              <td><input type="checkbox"></td>			                              
-				                          <td>1</td>
-									      <td>华为Mete8</td>
-									      <td>3020</td>
-									      <td>数码产品</td>
-									      <td>手机</td>
-									      <td>国产手机</td>
+			                          <tr ng-repeat="entity in list">
+			                              <td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
+                                          <td>{{entity.id}}</td>
+                                          <td>{{entity.goodsName}}</td>
+                                          <td>{{entity.price}}</td>
+                                          <td>{{itemCatList[entity.category1Id]}}</td>
+                                          <td>{{itemCatList[entity.category2Id]}}</td>
+                                          <td>{{itemCatList[entity.category3Id]}}</td>
 		                                  <td>		                                  
 		                                  	<span>
-		                                  		申请中
+		                                  		{{status[entity.auditStatus]}}
 		                                  	</span>
 		                                  	
 		                                  </td>		                                  
@@ -84,44 +97,10 @@
 		                                 	  <button type="button" class="btn bg-olive btn-xs" >详情</button>                  
 		                                  </td>
 			                          </tr>
-									  <tr>
-			                              <td><input type="checkbox"></td>			                              
-				                          <td>2</td>
-									      <td>三星手雷</td>
-									      <td>1080</td>
-									      <td>数码产品</td>
-									      <td>手机</td>
-									      <td>进口手机</td>
-		                                  <td>	                                 
-		                                  	
-		                                  	<span>
-		                                  		已驳回
-		                                  	</span>
-		                                  </td>		                                  
-		                                  <td class="text-center">                                          
-		                                 	  <button type="button" class="btn bg-olive btn-xs" >详情</button>                  
-		                                  </td>
-			                          </tr>
-									   <tr>
-			                              <td><input type="checkbox"></td>			                              
-				                          <td>3</td>
-									      <td>小米6S</td>
-									      <td>999</td>
-									      <td>数码产品</td>
-									      <td>手机</td>
-									      <td>国产手机</td>
-		                                  <td>	                                 
-		                                  	
-		                                  	<span>
-		                                  		审核通过
-		                                  	</span>
-		                                  </td>		                                  
-		                                  <td class="text-center">                                          
-		                                 	  <button type="button" class="btn bg-olive btn-xs" >详情</button>                  
-		                                  </td>
-			                          </tr>
+
 			                      </tbody>
 			                  </table>
+                            <tm-pagination conf="paginationConf"></tm-pagination>
 			                  <!--数据列表/-->                        
 							  
 							 
@@ -131,7 +110,154 @@
                         
                      </div>
                     <!-- /.box-body -->
-        
+  <!-- 商家详情
+  <div class="modal fade" id="sellerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" >
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 id="myModalLabel">商家详情</h3>
+              </div>
+              <div class="modal-body">
+
+                  <ul class="nav nav-tabs">
+                      <li class="active">
+                          <a href="#home" data-toggle="tab">商品基本信息</a>
+                      </li>
+                      <li >
+                          <a href="#pic_upload" data-toggle="tab">商品图片</a>
+                      </li>
+                      <li >
+                          <a href="#customAttribute" data-toggle="tab">扩展属性</a>
+                      </li>
+                      <li >
+                          <a href="#spec" data-toggle="tab" >规格</a>
+                      </li>
+                  </ul>
+
+                  &lt;!&ndash; 选项卡开始 &ndash;&gt;
+                  <div id="myTabContent" class="tab-content">
+                      <div class="tab-pane active in" id="home">
+                          <br>
+                          <table class="table table-bordered table-striped"  width="800px">
+                              <tr>
+                                  <td>
+                                      二级分类:{{entity.goods.category1Id}}
+                                  </td>
+                                  <td>
+                                      二级分类:{{entity.goods.category2Id}}
+                                  </td>
+                                  <td>
+                                      三级分类:{{entity.goods.category3Id}}
+                                  </td>
+                                  <td>
+                                      模板ID:{{entity.goods.typeTemplateId}}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>商品名称</td>
+                                  <td>{{entity.goods.goodsName}}</td>
+                              </tr>
+                              <tr>
+                                  <td>品牌</td>
+                                  <td>{{entity.goods.brandId}}</td>
+                              </tr>
+                              <tr>
+                                  <td>副标题</td>
+                                  <td>{{entity.goods.caption}}</td>
+                              </tr>
+                              <tr>
+                                  <td>价格</td>
+                                  <td>{{entity.goods.price}}</td>
+                              </tr>
+                              <tr>
+                                  <td>商品介绍</td>
+                                  <td>{{entity.goodsDesc.introduction}}</td>
+                              </tr>
+                              <tr>
+                                  <td>包装列表</td>
+                                  <td>{{entity.goodsDesc.packageList}}</td>
+                              </tr>
+                              <tr>
+                                  <td>售后服务</td>
+                                  <td>{{entity.goodsDesc.saleService}}</td>
+                              </tr>
+                          </table>
+                      </div>
+                      <div class="tab-pane fade" >
+                          <br>
+                          <table class="table table-bordered table-striped" >
+                              <tr ng-repeat="pojo in entity.goodsDesc.itemImages">
+                                  <td><input  type="checkbox" ></td>
+                                  <td>
+                                      {{pojo.color}}
+                                  </td>
+                                  <td>
+                                     图片: <img alt="" src="{{pojo.url}}" width="100px" height="100px">
+                                  </td>
+
+                              </tr>
+                          </table>
+                      </div>
+                      <div class="tab-pane fade" id="certificate">
+                          <br>
+                          <table class="table table-bordered table-striped" >
+                              <tr>
+                                  <td>营业执照号</td>
+                                  <td>{{entity.licenseNumber}}</td>
+                              </tr>
+                              <tr>
+                                  <td>税务登记证号</td>
+                                  <td>{{entity.taxNumber}}</td>
+                              </tr>
+                              <tr>
+                                  <td>组织机构代码证号</td>
+                                  <td>{{entity.orgNumber}}</td>
+                              </tr>
+                          </table>
+                      </div>
+                      <div class="tab-pane fade" id="ceo">
+                          <br>
+                          <table class="table table-bordered table-striped" >
+                              <tr>
+                                  <td>法定代表人</td>
+                                  <td>{{entity.legalPerson}}</td>
+                              </tr>
+                              <tr>
+                                  <td>法定代表人身份证号</td>
+                                  <td>{{entity.legalPersonCardId}}</td>
+                              </tr>
+                          </table>
+                      </div>
+                      <div class="tab-pane fade" id="bank">
+                          <br>
+                          <table class="table table-bordered table-striped" >
+                              <tr>
+                                  <td>开户行名称</td>
+                                  <td>{{entity.bankUser}}</td>
+                              </tr>
+                              <tr>
+                                  <td>开户行支行</td>
+                                  <td>海淀支行</td>
+                              </tr>
+                              <tr>
+                                  <td>银行账号</td>
+                                  <td>{{entity.bankName}}</td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+                  &lt;!&ndash; 选项卡结束 &ndash;&gt;
+
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>-->
+
 </body>
 
 </html>

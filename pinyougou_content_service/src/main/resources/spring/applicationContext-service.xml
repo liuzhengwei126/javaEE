@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://code.alibabatech.com/schema/dubbo
+   http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--配置服务提供者应用名称-->
+    <dubbo:application name="pinyougou_context_service"/>
+    <!--配置注册中心-->
+    <dubbo:registry address="zookeeper://192.168.25.133:2181"/>
+    <!--配置响应超时-->
+    <dubbo:provider timeout="6000" delay="-1"    retries="0"/>
+    <!--配置服务调用的端口 默认端口为20880 为什么是这个???-->
+    <dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
+
+    <!--发布服务:注解的方式 扫描对应的包 @service 即可发布服务-->
+    <dubbo:annotation package="com.pinyougou.content.service.impl"></dubbo:annotation>
+
+</beans>

@@ -7,9 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pinyougou_common" />
+        <module name="pinyougou_content_interface" />
+        <module name="pinyougou_content_service" />
         <module name="pinyougou_dao" />
         <module name="pinyougou_manager_web" />
         <module name="pinyougou_pojo" />
+        <module name="pinyougou_protal_web" />
         <module name="pinyougou_sellergoods_interface" />
         <module name="pinyougou_sellergoods_service" />
         <module name="pinyougou_shop_web" />
@@ -17,10 +20,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="pinyougou_common" target="1.8" />
+      <module name="pinyougou_content_interface" target="1.8" />
+      <module name="pinyougou_content_service" target="1.8" />
       <module name="pinyougou_dao" target="1.8" />
       <module name="pinyougou_manager_web" target="1.8" />
       <module name="pinyougou_parent" target="1.8" />
       <module name="pinyougou_pojo" target="1.8" />
+      <module name="pinyougou_protal_web" target="1.8" />
       <module name="pinyougou_sellergoods_interface" target="1.8" />
       <module name="pinyougou_sellergoods_service" target="1.8" />
       <module name="pinyougou_shop_web" target="1.8" />

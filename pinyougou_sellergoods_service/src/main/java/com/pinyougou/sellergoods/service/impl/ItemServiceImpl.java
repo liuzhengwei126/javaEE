@@ -11,8 +11,7 @@ import com.pinyougou.mapper.TbItemMapper;
 import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojo.TbItemExample;
 import com.pinyougou.pojo.TbItemExample.Criteria;
-
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -21,6 +20,7 @@ import com.pinyougou.pojo.TbItemExample.Criteria;
  *
  */
 @Service
+@Transactional
 public class ItemServiceImpl implements ItemService {
 
 	@Autowired

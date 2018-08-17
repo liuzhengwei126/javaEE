@@ -70,8 +70,17 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public ResultModel update(@RequestBody TbGoods goods){
-		try {
+	public ResultModel update(@RequestBody Goods goods){
+        //判断该商品是否属于登录的商家
+        String sellerId = SecurityContextHolder.getContext ().getAuthentication ().getName ();
+
+        Goods goods1 = goodsService.findOne (goods.getGoods ().getId ());
+
+        if (!goods1.getGoods ().getSellerId ().equals (sellerId) || !goods.getGoods ().getSellerId ().equals (sellerId )){
+            return new ResultModel(false, "非法操作",null);
+        }
+
+        try {
 			goodsService.update(goods);
 			return new ResultModel(true, "修改成功",null);
 		} catch (Exception e) {
@@ -86,7 +95,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbGoods findOne(Long id){
+	public Goods findOne(Long id){
 		return goodsService.findOne(id);		
 	}
 	
@@ -108,14 +117,46 @@ public class GoodsController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param goods
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
-		return goodsService.findPage(goods, page, rows);		
-	}
+        String name = SecurityContextHolder.getContext ().getAuthentication ().getName ();
+        goods.setSellerId (name);
+        PageResult page1 = goodsService.findPage (goods, page, rows);
+        return page1;
+    }
+
+    /**
+     * 上架下架
+     * @param ids
+     * @param status
+     * @return
+     */
+	@RequestMapping("/updateIsMarketable")
+	public  ResultModel updateIsMarketable(Long[] ids,String status) {
+
+	    //有点不严谨 要判断上架的是否是属于该商家的商品
+        String sellerId = SecurityContextHolder.getContext ().getAuthentication ().getName ();
+        for (Long id : ids) {
+            Goods goods = goodsService.findOne (id);
+            String sellerId1 = goods.getGoods ().getSellerId ();
+            if (!sellerId.equals (sellerId1)){
+                return new ResultModel (false,"非法操作",null);
+            }
+        }
+
+        try {
+            goodsService.updateIsMarketable (ids, status);
+            return new ResultModel (true,"操作成功",null);
+        } catch (Exception e) {
+            e.printStackTrace ();
+            return  new ResultModel (false,"操作失败",null);
+        }
+
+    }
 	
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import sun.security.krb5.internal.PAData;
+
 
 import java.io.File;
 import java.util.UUID;
@@ -19,7 +19,7 @@ import java.util.UUID;
  * @Version: $version$
  */
 @RestController
-public class UploadCController {
+public class UploadController {
 
     @Value ("${IMAGE_SERVER_URL}")
     private String IMAGE_SERVER_URL;

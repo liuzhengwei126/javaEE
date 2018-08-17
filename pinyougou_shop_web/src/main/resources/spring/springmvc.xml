@@ -15,7 +15,7 @@
 
     <!--配置应用名 服务消费方-->
     <dubbo:application name="pinyougou-shop-web"/>
-    <dubbo:registry address="zookeeper://192.168.25.133:2181"/>
+    <dubbo:registry address="zookeeper://192.168.25.133:2181" />
    <!-- 注解扫描-->
     <dubbo:annotation package="com.pinyougou.shop.controller"/>
     <!--注解驱动并设置统一日期的输出格式-->

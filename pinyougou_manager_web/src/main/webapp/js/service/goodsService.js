@@ -5,10 +5,11 @@ app.service('goodsService',function($http){
 	this.findAll=function(){
 		return $http.get('../goods/findAll.do');		
 	}
-	//分页 
+	//分页
 	this.findPage=function(page,rows){
 		return $http.get('../goods/findPage.do?page='+page+'&rows='+rows);
 	}
+
 	//查询实体
 	this.findOne=function(id){
 		return $http.get('../goods/findOne.do?id='+id);
@@ -28,5 +29,13 @@ app.service('goodsService',function($http){
 	//搜索
 	this.search=function(page,rows,searchEntity){
 		return $http.post('../goods/search.do?page='+page+"&rows="+rows, searchEntity);
-	}    	
+	}
+    //搜索
+    this.search=function(page,rows,searchEntity){
+        return $http.post('../goods/search.do?page='+page+"&rows="+rows, searchEntity);
+    }
+    //修改审核专题
+    this.updateStatus = function (ids,status) {
+        return $http.get('../goods/updateStatus.do?ids='+ids+'&status='+status);
+    }
 });

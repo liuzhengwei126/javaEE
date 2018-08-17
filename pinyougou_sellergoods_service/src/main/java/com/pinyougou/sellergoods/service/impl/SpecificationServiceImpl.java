@@ -17,6 +17,7 @@ import com.pinyougou.mapper.TbSpecificationMapper;
 import com.pinyougou.pojo.TbSpecification;
 import com.pinyougou.pojo.TbSpecificationExample;
 import com.pinyougou.pojo.TbSpecificationExample.Criteria;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -25,6 +26,7 @@ import com.pinyougou.pojo.TbSpecificationExample.Criteria;
  * @author Administrator
  */
 @Service
+@Transactional
 public class SpecificationServiceImpl implements SpecificationService {
 
     @Autowired

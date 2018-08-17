@@ -59,5 +59,6 @@ public interface GoodsDescService {
 	 * @return
 	 */
 	public PageResult findPage(TbGoodsDesc goodsDesc, int pageNum, int pageSize);
-	
+
+
 }
